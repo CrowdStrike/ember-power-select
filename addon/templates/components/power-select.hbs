@@ -16,6 +16,8 @@
 
   {{#dropdown.trigger
     role=(readonly triggerRole)
+    aria-autocomplete=(readonly ariaAutocomplete)
+    aria-activedescendant=(readonly highlightedId)
     tagName=(readonly _triggerTagName)
     ariaDescribedBy=(readonly ariaDescribedBy)
     ariaInvalid=(readonly ariaInvalid)
@@ -61,11 +63,12 @@
       searchEnabled=(readonly searchEnabled)
       onFocus=(action "onFocus")
       onBlur=(action "onBlur")
-      placeholder=(readonly placeholder)
-      placeholderComponent=(readonly placeholderComponent)
+      highlightedId=(readonly highlightedId)
       searchPlaceholder=(readonly searchPlaceholder)
       select=(readonly publicAPI)
-      selectedItemComponent=(readonly selectedItemComponent)}}
+      selectedItemComponent=(readonly selectedItemComponent)
+      resultsCount=(readonly publicAPI.resultsCount)
+      resultsCountId=(readonly resultsCountId)}}
     {{#if mustShowSearchMessage}}
       {{component searchMessageComponent
         searchMessage=(readonly searchMessage)

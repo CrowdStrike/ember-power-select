@@ -85,6 +85,7 @@ export default Component.extend({
   closeOnSelect: fallbackIfUndefined(true),
   defaultHighlighted: fallbackIfUndefined(defaultHighlighted),
   typeAheadMatcher: fallbackIfUndefined(defaultTypeAheadMatcher),
+  triggerRole: fallbackIfUndefined('combobox'),
 
   afterOptionsComponent: fallbackIfUndefined(null),
   beforeOptionsComponent: fallbackIfUndefined('power-select/before-options'),
@@ -201,6 +202,19 @@ export default Component.extend({
     return !publicAPI.loading
       && publicAPI.resultsCount === 0
       && (!this.get('search') || publicAPI.lastSearchedText.length > 0);
+  }),
+
+  ariaAutocomplete: computed('searchEnabled', function() {
+    return this.get('searchEnabled') ? 'list' : 'none';
+  }),
+
+  highlightedId: computed('publicAPI.highlighted', function() {
+    let { highlighted, results, uniqueId } = this.get('publicAPI');
+    return `${uniqueId}-${indexOfOption(results, highlighted)}`;
+  }),
+
+  resultsCountId: computed('publicAPI.uniqueId', function() {
+    return `ember-power-select-results-count-${this.get('publicAPI.uniqueId')}`;
   }),
 
   // Actions
